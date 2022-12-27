@@ -89,7 +89,7 @@ export default function Login() {
           },
         }
       );
-      console.log(res);
+      // console.log(res);
       if (res.data != "Some error occurred") {
         setIsValidUser(true);
         localStorage.setItem("user", JSON.stringify(res.data));

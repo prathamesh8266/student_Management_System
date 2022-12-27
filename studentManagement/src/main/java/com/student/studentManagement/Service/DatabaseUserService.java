@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import java.util.Collections;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,6 +25,14 @@ public class DatabaseUserService {
         User user = new User(DBUser.getEmail(), DBUser.getPassword(), Collections.singleton(new SimpleGrantedAuthority("ROLE_ADMIN")));
         return user;
     };
+
+    public DatabaseUser findById(Integer id){
+        Optional<DatabaseUser> user = databaseUserRepository.findById(id);
+        if(user.isEmpty()){
+            throw new ResourceNotFoundException("User","Id",id+"");
+        }
+        return user.get();
+    }
 
     public DatabaseUser findDatabaseUserByEmail(String email){
         DatabaseUser DBUser = databaseUserRepository.findByEmail(email);
