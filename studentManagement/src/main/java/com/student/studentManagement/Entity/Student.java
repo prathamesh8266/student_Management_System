@@ -24,7 +24,7 @@ public class Student {
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "class")
-    private Grade student_class;
+    private Grade studentClass;
 
     @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "user_id")
@@ -38,18 +38,18 @@ public class Student {
 //        "motherName": "Supriya",
 //        "fatherName": "Dasharath",
 //        "bloodGroup": "O+ve",
-//        "student_class": {
-//        "id": 1,
-//        "grade": 12,
-//        "user": {
-//        "id": 1,
-//        "email": "admin",
-//        "password": "password"
-//        }
+//        "studentClass": {
+    //        "id": 1,
+    //        "grade": 12,
+    //        "user": {
+        //        "id": 1,
+        //        "email": "admin",
+        //        "password": "password"
+    //        }
 //        },
 //        "user": {
-//        "id": 1,
-//        "email": "admin",
-//        "password": "password"
+    //        "id": 1,
+    //        "email": "admin",
+    //        "password": "password"
 //        }
 //}

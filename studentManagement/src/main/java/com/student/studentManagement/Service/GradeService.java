@@ -7,16 +7,16 @@ import com.student.studentManagement.Exceptions.ResourceNotFoundException;
 import com.student.studentManagement.Repository.GradeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class GradeService {
-
     private final GradeRepository gradeRepository;
     private final DatabaseUserService databaseUserService;
     public Grade saveGrade(Grade g){
+        DatabaseUser user = databaseUserService.findDatabaseUserByEmail(g.getUser().getEmail());
+        g.setUser(user);
         return gradeRepository.save(g);
     }
     public Grade findByClass(Integer grade){
@@ -27,7 +27,11 @@ public class GradeService {
         if(db_user == null){
             throw new ResourceNotFoundException("User" , "Id" , id+"");
         }
-        return gradeRepository.findByUser(db_user);
+        return gradeRepository.findByUserOrderByGrade(db_user);
+    }
+
+    public Grade getGrade(Integer grade){
+        return gradeRepository.findByGrade(grade);
     }
 
 }

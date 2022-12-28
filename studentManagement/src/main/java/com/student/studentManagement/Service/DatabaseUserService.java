@@ -17,6 +17,7 @@ public class DatabaseUserService {
 
     private final DatabaseUserRepository databaseUserRepository;
 
+    // method used by spring security
     public User findByEmail(String email){
         DatabaseUser DBUser = databaseUserRepository.findByEmail(email);
         if(DBUser == null){

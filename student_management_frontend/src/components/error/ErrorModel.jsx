@@ -1,13 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const ErrorModel = ({
-  resourcceName,
-  fieldName,
-  fieldValue,
-  navigateTo,
-  setIsValidUser,
-}) => {
+const ErrorModel = ({ error, navigateTo, setIsValidUser }) => {
   const navigate = useNavigate();
   const buttonClickHandler = () => {
     setIsValidUser(true);
@@ -27,9 +21,7 @@ const ErrorModel = ({
       }}
     >
       <h1>Error</h1>
-      <p>
-        {resourcceName} not found with {fieldName} : {fieldValue}
-      </p>
+      <p>{error}</p>
       <div>
         <button
           style={{

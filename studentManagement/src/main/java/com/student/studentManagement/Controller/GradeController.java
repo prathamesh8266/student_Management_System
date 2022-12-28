@@ -21,4 +21,5 @@ public class GradeController {
     public List<Grade> getAllGrade(@PathVariable Integer id){
         return gradeService.findAllByUser(id);
     }
+
 }

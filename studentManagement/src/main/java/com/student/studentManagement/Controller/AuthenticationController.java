@@ -37,6 +37,7 @@ public class AuthenticationController {
         final UserDetails spring_user = databaseUserService.findByEmail(user.getEmail());
         if(spring_user != null){
             String token  = jwtUtil.generateToken(spring_user);
+            System.out.println("token -> "+ token);
             Integer id = databaseUserService.findDatabaseUserByEmail(user.getEmail()).getId();
             String userName = spring_user.getUsername();
             VerifiedUserResponse verifiedUserResponse =

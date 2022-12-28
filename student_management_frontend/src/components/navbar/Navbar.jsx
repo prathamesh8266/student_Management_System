@@ -10,6 +10,7 @@ const divStyle = {
 };
 
 const buttonStyle = {
+  margin: "0 10px",
   height: "40px",
   width: "90px",
   border: "none",
@@ -25,13 +26,22 @@ const Navbar = () => {
     return navigate("/");
   };
 
+  const addStudentHandler = () => {
+    return navigate("/add");
+  };
+
   return (
     <div style={divStyle}>
       <h3>{userName}</h3>
       <h2>Dashboard</h2>
-      <button style={buttonStyle} onClick={logoutHandler}>
-        Logout
-      </button>
+      <div>
+        <button style={buttonStyle} onClick={addStudentHandler}>
+          Add student
+        </button>
+        <button style={buttonStyle} onClick={logoutHandler}>
+          Logout
+        </button>
+      </div>
     </div>
   );
 };

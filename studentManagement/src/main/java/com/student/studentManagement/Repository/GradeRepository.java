@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface GradeRepository extends JpaRepository<Grade, Integer> {
     public Grade findByGrade(Integer grade);
-    public List<Grade> findByUser(DatabaseUser user);
+    public List<Grade> findByUserOrderByGrade(DatabaseUser user);
 }

@@ -38,9 +38,12 @@ const theme = createTheme();
 
 export default function Login() {
   const [isValidUser, setIsValidUser] = React.useState(true);
+  const [errorMessage, setErrorMessage] = React.useState("");
+
   const setValidUser = (bool) => {
     setIsValidUser(bool);
   };
+
   let navigate = useNavigate();
 
   React.useEffect(() => {
@@ -89,8 +92,8 @@ export default function Login() {
           },
         }
       );
-      // console.log(res);
-      if (res.data != "Some error occurred") {
+      console.log(res);
+      if (res.data != null && res.data != "Some error occurred") {
         setIsValidUser(true);
         localStorage.setItem("user", JSON.stringify(res.data));
         return navigate("/dashboard");
@@ -98,16 +101,18 @@ export default function Login() {
       console.log(res);
     } catch (e) {
       // if any ecception occures show error modal
-      setIsValidUser(false);
+      console.log(e.message);
+      if (e.message === "Network Error") {
+        loginError("Server not responding");
+      } else if (e.message === "Request failed with status code 404") {
+        loginError("Invalid username or password");
+      }
     }
   };
 
-  const errorModalShower = () => {
-    return (
-      <>
-        <ErrorModel />
-      </>
-    );
+  const loginError = (message) => {
+    setIsValidUser(false);
+    setErrorMessage(message);
   };
 
   return (
@@ -124,9 +129,7 @@ export default function Login() {
         >
           {!isValidUser && (
             <ErrorModel
-              resourcceName={"User"}
-              fieldName={"Email or Password"}
-              fieldValue={""}
+              error={errorMessage}
               navigateTo={""}
               setIsValidUser={setValidUser}
             />
